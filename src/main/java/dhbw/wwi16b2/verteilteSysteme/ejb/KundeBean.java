@@ -5,10 +5,18 @@
  */
 package dhbw.wwi16b2.verteilteSysteme.ejb;
 
+import dhbw.wwi16b2.verteilteSysteme.jpa.Kunde;
+import javax.ejb.Stateless;
+
 /**
  *
  * @author z003ne3b
  */
-public class KundeBean {
+@Stateless
+public class KundeBean extends EntityBean<Kunde, String> {
+    
+    public KundeBean() {
+        super(Kunde.class);
+    }
     
 }

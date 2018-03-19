@@ -5,10 +5,18 @@
  */
 package dhbw.wwi16b2.verteilteSysteme.ejb;
 
+import dhbw.wwi16b2.verteilteSysteme.jpa.Fahrzeug;
+import javax.ejb.Stateless;
+
 /**
  *
  * @author z003ne3b
  */
-public class FahrzeugBean {
+@Stateless
+public class FahrzeugBean extends EntityBean<Fahrzeug, String> {
+    
+    public FahrzeugBean() {
+        super(Fahrzeug.class);
+    }
     
 }
