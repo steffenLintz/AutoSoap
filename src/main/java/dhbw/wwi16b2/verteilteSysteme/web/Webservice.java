@@ -5,10 +5,61 @@
  */
 package dhbw.wwi16b2.verteilteSysteme.web;
 
+import dhbw.wwi16b2.verteilteSysteme.ejb.FahrzeugBean;
+import dhbw.wwi16b2.verteilteSysteme.ejb.KundeBean;
+import dhbw.wwi16b2.verteilteSysteme.ejb.LeihvertragBean;
+import dhbw.wwi16b2.verteilteSysteme.jpa.Fahrzeug;
+import dhbw.wwi16b2.verteilteSysteme.jpa.Kunde;
+import dhbw.wwi16b2.verteilteSysteme.jpa.Leihvertrag;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebResult;
+import javax.jws.WebService;
+
 /**
  *
- * @author z003ne3b
+ * Car Sharing - SOAP-Webservice
  */
+
+@Stateless
+@WebService(serviceName ="AutoSoap")
 public class Webservice {
     
+    @EJB
+    FahrzeugBean fahrzeugBean;
+    
+    @EJB
+    KundeBean kundeBean;
+    
+    @EJB
+    LeihvertragBean leihvertragBean;
+    
+    @WebMethod
+    @WebResult(name = "fahrzeug")
+    public Fahrzeug createNewFahrzeug(@WebParam(name = "fahrzeug") Fahrzeug fahrzeug) {
+            return fahrzeugBean.saveNew(fahrzeug);
+    }
+    
+    @WebMethod
+    @WebResult(name = "kunde")
+    public Kunde createNewKunde(@WebParam(name = "kunde") Kunde kunde){
+            return kundeBean.saveNew(kunde);
+    }
+    
+    @WebMethod
+    @WebResult(name = "fahrzeuge")
+    public List<Fahrzeug> getAllFahrzeuge() {
+        return fahrzeugBean.findAll();
+    }
+    
+    @WebMethod
+    @WebResult(name = "leihvertraege")
+    public List<Leihvertrag> findVertraegeByUser(
+            @WebParam(name = "kunde") Kunde kunde) {
+
+        return leihvertragBean.findVertraegeByUser(kunde);
+    }
 }
