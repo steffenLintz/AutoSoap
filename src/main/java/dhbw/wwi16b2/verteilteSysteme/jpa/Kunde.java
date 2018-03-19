@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -37,14 +36,13 @@ public class Kunde implements Serializable {
     private String land;
     
 //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
-    public Kunde(String vorname, String nachname, String straße, String plz, String ort, String land, Leihvertrag leihvertrag) {
+    public Kunde(String vorname, String nachname, String straße, String plz, String ort, String land) {
         this.vorname = vorname;
         this.nachname = nachname;
         this.straße = straße;
         this.plz = plz;
         this.ort = ort;
         this.land = land;
-        this.leihvertrag = leihvertrag;
     }
     
     public Kunde() {
@@ -106,14 +104,6 @@ public class Kunde implements Serializable {
     
     public void setLand(String land) {
         this.land = land;
-    }
-    
-    public Leihvertrag getLeihvertrag() {
-        return leihvertrag;
-    }
-    
-    public void setLeihvertrag(Leihvertrag leihvertrag) {
-        this.leihvertrag = leihvertrag;
     }
 //</editor-fold>
 }
