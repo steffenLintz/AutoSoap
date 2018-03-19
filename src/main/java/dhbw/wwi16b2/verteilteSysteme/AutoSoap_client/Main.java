@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import static java.lang.Compiler.command;
+import java.util.List;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.ws.Holder;
 
@@ -153,10 +154,28 @@ public class Main {
         System.out.println("Fahrzeug mit der ID " + hFahrzeug.value.getId() + "wurde angelegt.");
     }
     
-     public void getAllFahrzeuge() throws IOException, DatatypeConfigurationException {
+     public void ausleihen() throws IOException, DatatypeConfigurationException {
         System.out.println("================");
-        System.out.println("Fahrzeuge anzeigen");
+        System.out.println("Fahrzeuge ausleihen");
         System.out.println("================");
         System.out.println();
+        
+        List<Fahrzeug> fahrzeuge = this.ws.getAllFahrzeuge();
+      
+        for (Fahrzeug fahrzeug : fahrzeuge) {
+            
+            System.out.print(fahrzeug.getHersteller());
+            System.out.print(fahrzeug.getModell() + ",");
+            System.out.print("Baujahr: " + fahrzeug.getBaujahr()+ ",");
+            System.out.print(fahrzeug.getId());
+            System.out.println();
+        }
+        
+        
+        System.out.println("Kundennummer:");
+        
+        System.out.println("Fahrzeug-ID:");
+        
+     }
     
 }
