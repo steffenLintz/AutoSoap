@@ -11,6 +11,7 @@ import dhbw.wwi16b2.verteilteSysteme.ejb.LeihvertragBean;
 import dhbw.wwi16b2.verteilteSysteme.jpa.Fahrzeug;
 import dhbw.wwi16b2.verteilteSysteme.jpa.Kunde;
 import dhbw.wwi16b2.verteilteSysteme.jpa.Leihvertrag;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -61,5 +62,16 @@ public class Webservice {
             @WebParam(name = "kunde") Kunde kunde) {
 
         return leihvertragBean.findVertraegeByUser(kunde);
+    }
+    
+    @WebMethod
+    @WebResult(name = "program")
+    public Leihvertrag ausleihen(
+            @WebParam(name = "kunde") Kunde kunde,
+            @WebParam(name = "fahrzeug") Fahrzeug fahrzeug,
+            @WebParam(name = "beginnDatum") Date beginnDatum,
+            @WebParam(name = "endDatum") Date endDatum) {
+
+        return leihvertragBean.ausleihen(kunde,fahrzeug, beginnDatum, endDatum);
     }
 }
