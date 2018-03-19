@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dhbw.wwi16b2.verteilteSysteme.ejb;
+package dhbw.wwi16b2.verteilteSysteme.AutoSoap.ejb;
 
-import dhbw.wwi16b2.verteilteSysteme.jpa.Fahrzeug;
+import dhbw.wwi16b2.verteilteSysteme.AutoSoap.jpa.Fahrzeug;
 import javax.ejb.Stateless;
 
 /**

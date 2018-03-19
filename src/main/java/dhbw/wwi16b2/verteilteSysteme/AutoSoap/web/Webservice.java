@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dhbw.wwi16b2.verteilteSysteme.web;
+package dhbw.wwi16b2.verteilteSysteme.AutoSoap.web;
 
-import dhbw.wwi16b2.verteilteSysteme.ejb.FahrzeugBean;
-import dhbw.wwi16b2.verteilteSysteme.ejb.KundeBean;
-import dhbw.wwi16b2.verteilteSysteme.ejb.LeihvertragBean;
-import dhbw.wwi16b2.verteilteSysteme.jpa.Fahrzeug;
-import dhbw.wwi16b2.verteilteSysteme.jpa.Kunde;
-import dhbw.wwi16b2.verteilteSysteme.jpa.Leihvertrag;
+import dhbw.wwi16b2.verteilteSysteme.AutoSoap.ejb.FahrzeugBean;
+import dhbw.wwi16b2.verteilteSysteme.AutoSoap.ejb.KundeBean;
+import dhbw.wwi16b2.verteilteSysteme.AutoSoap.ejb.LeihvertragBean;
+import dhbw.wwi16b2.verteilteSysteme.AutoSoap.jpa.Fahrzeug;
+import dhbw.wwi16b2.verteilteSysteme.AutoSoap.jpa.Kunde;
+import dhbw.wwi16b2.verteilteSysteme.AutoSoap.jpa.Leihvertrag;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;

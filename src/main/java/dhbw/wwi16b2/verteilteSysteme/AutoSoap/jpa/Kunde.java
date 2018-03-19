@@ -1,4 +1,4 @@
-package dhbw.wwi16b2.verteilteSysteme.jpa;
+package dhbw.wwi16b2.verteilteSysteme.AutoSoap.jpa;
 
 import java.io.Serializable;
 import javax.persistence.Entity;

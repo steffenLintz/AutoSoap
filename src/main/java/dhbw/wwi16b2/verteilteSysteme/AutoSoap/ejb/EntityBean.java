@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dhbw.wwi16b2.verteilteSysteme.ejb;
+package dhbw.wwi16b2.verteilteSysteme.AutoSoap.ejb;
 
 import java.util.List;
 import javax.persistence.EntityManager;
