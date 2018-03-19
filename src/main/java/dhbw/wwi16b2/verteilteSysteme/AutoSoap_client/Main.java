@@ -5,6 +5,7 @@
  */
 package dhbw.wwi16b2.verteilteSysteme.AutoSoap_client;
 
+import dhbw.wwi16b2.verteilteSysteme.AutoSoap.jpa.Fahrzeug;
 import dhbw.wwi16b2.verteilteSysteme.AutoSoap.jpa.Kunde;
 import dhbw.wwi16b2.verteilteSysteme.AutoSoap.web.Webservice;
 import dhbw.wwi16b2.verteilteSysteme.AutoSoap.web.AutoSoap;
@@ -62,10 +63,10 @@ public class Main {
         
         switch (command.toUpperCase()) {
                 case "K":
-                    this.searchPrograms();
+                    this.createNewKunde();
                     break;
                 case "F":
-                    this.searchPrograms();
+                    this.createNewFahrzeug();
                     break;
                 case "A":
                     this.searchPrograms();
@@ -118,12 +119,44 @@ public class Main {
         kunde.setLand(Land);
         
         Holder<Kunde> hKunde = new Holder<>(kunde);
-        ws.createNewKunde(hKunde);
+        ws.createNewKunde(kunde);
         
         System.out.println("Kunde mit der ID " + hKunde.value.getId() + "wurde angelegt.");
         
-        
-        
     }
+    
+    public void createNewFahrzeug() throws IOException, DatatypeConfigurationException {
+        System.out.println("================");
+        System.out.println("Fahrzeug anlegen");
+        System.out.println("================");
+        System.out.println();
+        
+        System.out.print("Hersteller:");
+        String Hersteller = this.fromKeyboard.readLine();
+        
+        System.out.print("Baujahr:");
+        int Baujahr = this.fromKeyboard.read();
+        
+        System.out.print("Modell:");
+        String Modell = this.fromKeyboard.readLine();
+        
+        System.out.println();
+        
+        Fahrzeug fahrzeug = new Fahrzeug();
+        fahrzeug.setHersteller(Hersteller);
+        fahrzeug.setBaujahr(Baujahr);
+        fahrzeug.setModell(Modell);
+        
+        Holder<Fahrzeug> hFahrzeug = new Holder<>(fahrzeug);
+        ws.createNewFahrzeug(fahrzeug);
+        
+        System.out.println("Fahrzeug mit der ID " + hFahrzeug.value.getId() + "wurde angelegt.");
+    }
+    
+     public void getAllFahrzeuge() throws IOException, DatatypeConfigurationException {
+        System.out.println("================");
+        System.out.println("Fahrzeuge anzeigen");
+        System.out.println("================");
+        System.out.println();
     
 }
