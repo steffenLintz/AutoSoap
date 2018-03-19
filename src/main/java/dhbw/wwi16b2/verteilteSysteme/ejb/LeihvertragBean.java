@@ -15,7 +15,7 @@ import javax.ejb.Stateless;
  * @author z003ne3b
  */
 @Stateless
-public class LeihvertragBean extends EntityBean<Leihvertrag, String> {
+public class LeihvertragBean extends EntityBean<Leihvertrag, Long> {
     
     public LeihvertragBean(){
         super(Leihvertrag.class);

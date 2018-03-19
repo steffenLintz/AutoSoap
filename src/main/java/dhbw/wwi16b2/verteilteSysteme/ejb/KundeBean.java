@@ -13,7 +13,7 @@ import javax.ejb.Stateless;
  * @author z003ne3b
  */
 @Stateless
-public class KundeBean extends EntityBean<Kunde, String> {
+public class KundeBean extends EntityBean<Kunde, Long> {
     
     public KundeBean() {
         super(Kunde.class);

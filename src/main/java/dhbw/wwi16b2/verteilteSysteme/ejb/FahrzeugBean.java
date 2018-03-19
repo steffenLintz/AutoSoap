@@ -13,7 +13,7 @@ import javax.ejb.Stateless;
  * @author z003ne3b
  */
 @Stateless
-public class FahrzeugBean extends EntityBean<Fahrzeug, String> {
+public class FahrzeugBean extends EntityBean<Fahrzeug, Long> {
     
     public FahrzeugBean() {
         super(Fahrzeug.class);
