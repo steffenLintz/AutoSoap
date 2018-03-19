@@ -65,7 +65,7 @@ public class Webservice {
     }
     
     @WebMethod
-    @WebResult(name = "program")
+    @WebResult(name = "leihvertraeg")
     public Leihvertrag ausleihen(
             @WebParam(name = "kunde") Kunde kunde,
             @WebParam(name = "fahrzeug") Fahrzeug fahrzeug,

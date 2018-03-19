@@ -31,20 +31,59 @@ public class LeihvertragBean extends EntityBean<Leihvertrag, Long> {
 
     public Leihvertrag ausleihen(Kunde kunde, Fahrzeug fahrzeug, Date beginndatum, Date enddatum) {
 
-        Boolean leihemoeglich = true;
-        
-        List<Leihvertrag> vertragezwischen = em.createQuery("SELECT l FROM Leihvertrag WHERE l.beginndatum > :kunde ORDER BY l.beginndatum").setParameter("beginndatum", beginndatum).setParameter("enddatum", enddatum).getResultList();
-        
-        if(vertragezwischen.isEmpty()){
-            List<Leihvertrag> außerhalb = em.createQuery("SELECT l FROM Leihvertrag WHERE l.kunde = :kunde ORDER BY l.beginndatum").setParameter("kunde", kunde).getResultList();
+        Boolean leihemoeglich = false;
+
+        List<Leihvertrag> vertragezwischen = em.createQuery("SELECT l FROM Leihvertrag l"
+                + " WHERE l.beginndatum < :beginndatum"
+                + " AND l.enddatum > :enddatum"
+                + " AND l.fahrzeug = :fahrzeug")
+                .setParameter("beginndatum", beginndatum)
+                .setParameter("enddatum", enddatum)
+                .setParameter("fahrzeug", fahrzeug)
+                .getResultList();
+
+        if (vertragezwischen.isEmpty()) {
+            List<Leihvertrag> außerhalb = em.createQuery("SELECT l FROM Leihvertrag l"
+                    + " WHERE l.beginndatum > :beginndatum"
+                    + " AND l.enddatum < :enddatum"
+                    + " AND l.fahrzeug = :fahrzeug")
+                    .setParameter("beginndatum", beginndatum)
+                    .setParameter("enddatum", enddatum)
+                    .setParameter("fahrzeug", fahrzeug)
+                    .getResultList();
+            if (außerhalb.isEmpty()) {
+                List<Leihvertrag> beginnvorher = em.createQuery("SELECT l FROM Leihvertrag l"
+                        + " WHERE l.beginndatum > :beginndatum"
+                        + " AND l.enddatum > :enddatum"
+                        + " AND l.fahrzeug = :fahrzeug")
+                        .setParameter("beginndatum", beginndatum)
+                        .setParameter("enddatum", enddatum)
+                        .setParameter("fahrzeug", fahrzeug)
+                        .getResultList();
+
+                if (beginnvorher.isEmpty()) {
+                    List<Leihvertrag> endevorher = em.createQuery("SELECT l FROM Leihvertrag l"
+                            + " WHERE l.beginndatum > :beginndatum"
+                            + " AND l.enddatum < :enddatum"
+                            + " AND l.fahrzeug = :fahrzeug")
+                            .setParameter("beginndatum", beginndatum)
+                            .setParameter("enddatum", enddatum)
+                            .setParameter("fahrzeug", fahrzeug)
+                            .getResultList();
+                    if (endevorher.isEmpty()) {
+                        leihemoeglich = true;
+                    }
+                }
+            }
+
         }
-        
 
         if (leihemoeglich) {
-            Leihvertrag leihvertrag = new Leihvertrag(kunde, fahrzeug, beginnDatum, endDatum);
+            Leihvertrag leihvertrag = new Leihvertrag(kunde, fahrzeug, beginndatum, enddatum);
             return this.saveNew(leihvertrag);
         } else {
             return null;
         }
-
     }
+
+}
