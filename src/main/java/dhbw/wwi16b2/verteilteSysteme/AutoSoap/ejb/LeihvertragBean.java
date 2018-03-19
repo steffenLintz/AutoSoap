@@ -18,19 +18,33 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class LeihvertragBean extends EntityBean<Leihvertrag, Long> {
-    
-    public LeihvertragBean(){
+
+    public LeihvertragBean() {
         super(Leihvertrag.class);
     }
 
     public List<Leihvertrag> findVertraegeByUser(Kunde kunde) {
-       return em.createQuery("SELECT l FROM Leihvertrag WHERE l.Kundenid = :kunden.Kundenid ORDER BY t.dueDate, t.dueTime")
-                 .setParameter("username", username)
-                 .getResultList();
+        return em.createQuery("SELECT l FROM Leihvertrag WHERE l.kunde = :kunde ORDER BY l.beginndatum")
+                .setParameter("kunde", kunde)
+                .getResultList();
     }
 
-    public Leihvertrag ausleihen(Kunde kunde, Fahrzeug fahrzeug, Date beginnDatum, Date endDatum) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Leihvertrag ausleihen(Kunde kunde, Fahrzeug fahrzeug, Date beginndatum, Date enddatum) {
+
+        Boolean leihemoeglich = true;
+        
+        List<Leihvertrag> vertragezwischen = em.createQuery("SELECT l FROM Leihvertrag WHERE l.beginndatum > :kunde ORDER BY l.beginndatum").setParameter("beginndatum", beginndatum).setParameter("enddatum", enddatum).getResultList();
+        
+        if(vertragezwischen.isEmpty()){
+            List<Leihvertrag> außerhalb = em.createQuery("SELECT l FROM Leihvertrag WHERE l.kunde = :kunde ORDER BY l.beginndatum").setParameter("kunde", kunde).getResultList();
+        }
+        
+
+        if (leihemoeglich) {
+            Leihvertrag leihvertrag = new Leihvertrag(kunde, fahrzeug, beginnDatum, endDatum);
+            return this.saveNew(leihvertrag);
+        } else {
+            return null;
+        }
+
     }
-    
-}

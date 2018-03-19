@@ -31,13 +31,6 @@ public class Leihvertrag implements Serializable {
     @GeneratedValue
     private final long id = 0;
     
-    @NotNull(message="KundenID -Fehler")
-    private final long KundenId = kunde.getId();
-    
-    
-    @NotNull(message="FahrzeugID -Fehler")
-    private final long fahrzeugId = fahrzeug.getId();
-    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date beginndatum;
     
