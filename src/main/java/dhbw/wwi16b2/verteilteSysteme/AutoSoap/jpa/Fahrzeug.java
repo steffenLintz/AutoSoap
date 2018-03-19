@@ -28,10 +28,10 @@ public class Fahrzeug implements Serializable {
     private String Modell;
     
     @NotNull(message = "Baujahr darf nicht null sein")
-    private int baujahr;
+    private String baujahr;
 
    //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
-    public Fahrzeug(String hersteller, String Modell, int baujahr) {
+    public Fahrzeug(String hersteller, String Modell, String baujahr) {
         this.hersteller = hersteller;
         this.Modell = Modell;
         this.baujahr = baujahr;
@@ -67,11 +67,11 @@ public class Fahrzeug implements Serializable {
         this.Modell = Modell;
     }
     
-    public int getBaujahr() {
+    public String getBaujahr() {
         return baujahr;
     }
     
-    public void setBaujahr(int baujahr) {
+    public void setBaujahr(String baujahr) {
         this.baujahr = baujahr;
     }
 //</editor-fold>

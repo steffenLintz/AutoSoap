@@ -24,7 +24,7 @@ public class LeihvertragBean extends EntityBean<Leihvertrag, Long> {
     }
 
     public List<Leihvertrag> findVertraegeByUser(Kunde kunde) {
-        return em.createQuery("SELECT l FROM Leihvertrag WHERE l.kunde = :kunde ORDER BY l.beginndatum")
+        return em.createQuery("SELECT l FROM Leihvertrag l WHERE l.kunde = :kunde ORDER BY l.beginndatum")
                 .setParameter("kunde", kunde)
                 .getResultList();
     }
