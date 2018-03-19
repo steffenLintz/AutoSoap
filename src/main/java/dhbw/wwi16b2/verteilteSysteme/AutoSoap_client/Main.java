@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import static java.lang.Compiler.command;
 import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.ws.Holder;
 
 /**
  *
@@ -113,6 +114,13 @@ public class Main {
         kunde.setNachname(Nachname);
         kunde.setStraße(Straße);
         kunde.setHausnummer(Hausnummer);
+        kunde.setOrt(Ort);
+        kunde.setLand(Land);
+        
+        Holder<Kunde> hKunde = new Holder<>(kunde);
+        ws.createNewKunde(hKunde);
+        
+        System.out.println("Kunde mit der ID " + hKunde.value.getId() + "wurde angelegt.");
         
         
         
