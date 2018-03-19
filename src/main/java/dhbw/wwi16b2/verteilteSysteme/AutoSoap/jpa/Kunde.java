@@ -26,6 +26,9 @@ public class Kunde implements Serializable {
     @NotNull(message = "Straße darf nicht leer sein")
     private String straße;
     
+    @NotNull(message = "Hausnummer darf nicht leer sein")
+    private String hausnummer;
+    
     @NotNull (message = "PLZ darf nicht leer sein")
     private String plz;
     
@@ -36,10 +39,11 @@ public class Kunde implements Serializable {
     private String land;
     
 //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
-    public Kunde(String vorname, String nachname, String straße, String plz, String ort, String land) {
+    public Kunde(String vorname, String nachname, String straße, String hausnummer, String plz, String ort, String land) {
         this.vorname = vorname;
         this.nachname = nachname;
         this.straße = straße;
+        this.hausnummer = hausnummer;
         this.plz = plz;
         this.ort = ort;
         this.land = land;
@@ -80,6 +84,14 @@ public class Kunde implements Serializable {
     
     public void setStraße(String straße) {
         this.straße = straße;
+    }
+    
+    public String getHausnummer() {
+        return hausnummer;
+    }
+    
+    public void setHausnummer(String hausnummer) {
+        this.hausnummer = hausnummer;
     }
     
     public String getPlz() {

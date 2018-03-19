@@ -5,6 +5,7 @@
  */
 package dhbw.wwi16b2.verteilteSysteme.AutoSoap_client;
 
+import dhbw.wwi16b2.verteilteSysteme.AutoSoap.jpa.Kunde;
 import dhbw.wwi16b2.verteilteSysteme.AutoSoap.web.Webservice;
 import dhbw.wwi16b2.verteilteSysteme.AutoSoap.web.AutoSoap;
 import java.io.BufferedReader;
@@ -106,6 +107,13 @@ public class Main {
         String Land = this.fromKeyboard.readLine();
         
         System.out.println();
+        
+        Kunde kunde = new Kunde();
+        kunde.setVorname(Vorname);
+        kunde.setNachname(Nachname);
+        kunde.setStraße(Straße);
+        kunde.setHausnummer(Hausnummer);
+        
         
         
     }
