@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.TableGenerator;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -18,7 +19,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Fahrzeug implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "fahrzeug_ids")
+    @TableGenerator(name = "fahrzeug_ids", initialValue = 0, allocationSize = 50)
     private long id = 0;
     
     @NotNull(message = "Hersteller darf nicht null sein")

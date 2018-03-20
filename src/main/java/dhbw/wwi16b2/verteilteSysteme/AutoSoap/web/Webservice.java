@@ -51,10 +51,23 @@ public class Webservice {
     }
     
     @WebMethod
+    @WebResult(name = "kunde")
+    public Kunde getKundebyId (@WebParam(name="id") long id){
+        return kundeBean.findById(id);
+    }
+    
+    @WebMethod
     @WebResult(name = "fahrzeuge")
     public List<Fahrzeug> getAllFahrzeuge() {
         return fahrzeugBean.findAll();
     }
+    
+    @WebMethod
+    @WebResult(name = "fahrzeug")
+    public Fahrzeug getFahrzeugbyId (@WebParam(name="id") long id){
+        return fahrzeugBean.findById(id);
+    }
+    
     
     @WebMethod
     @WebResult(name = "leihvertraege")

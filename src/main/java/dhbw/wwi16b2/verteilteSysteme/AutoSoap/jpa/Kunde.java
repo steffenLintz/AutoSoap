@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.TableGenerator;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -14,28 +15,29 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Kunde implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "kunden_ids")
+    @TableGenerator(name = "kunden_ids", initialValue = 0, allocationSize = 50)
     private long id = 0;
     
     @NotNull(message= "Vorname darf nicht leer sein")
     private String vorname;
     
-    @NotNull(message= "Nachname darf nicht leer sein")
+   @NotNull(message= "Nachname darf nicht leer sein")
     private String nachname;
     
-    @NotNull(message = "Straße darf nicht leer sein")
+   @NotNull(message = "Straße darf nicht leer sein")
     private String straße;
     
-    @NotNull(message = "Hausnummer darf nicht leer sein")
+   @NotNull(message = "Hausnummer darf nicht leer sein")
     private String hausnummer;
     
-    @NotNull (message = "PLZ darf nicht leer sein")
+   @NotNull (message = "PLZ darf nicht leer sein")
     private String plz;
     
-    @NotNull (message = "Ort darf nicht leer sein")
+  @NotNull (message = "Ort darf nicht leer sein")
     private String ort;
     
-    @NotNull (message = "Land darf nicht leer sein")
+   @NotNull (message = "Land darf nicht leer sein")
     private String land;
     
 //<editor-fold defaultstate="collapsed" desc="Konstruktoren">

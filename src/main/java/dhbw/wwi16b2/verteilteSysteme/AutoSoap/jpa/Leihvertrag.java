@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 
 /**
@@ -27,8 +28,9 @@ public class Leihvertrag implements Serializable {
     Fahrzeug fahrzeug;
     
     @Id
-    @GeneratedValue
-    private final long id = 0;
+    @GeneratedValue(generator = "leihvertrag_ids")
+    @TableGenerator(name = "leihvertrag_ids", initialValue = 0, allocationSize = 50)
+    private long id = 0;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date beginndatum;
@@ -82,6 +84,15 @@ public class Leihvertrag implements Serializable {
     public void setEnddatum(Date enddatum) {
         this.enddatum = enddatum;
     }
+       public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
+    
 //</editor-fold>
   
 }
