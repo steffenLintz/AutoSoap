@@ -29,13 +29,13 @@ public class LeihvertragBean extends EntityBean<Leihvertrag, Long> {
                 .getResultList();
     }
 
-    public Leihvertrag ausleihen(Kunde kunde, Fahrzeug fahrzeug, Date beginndatum, Date enddatum) {
+    public Leihvertrag ausleihen(Kunde kunde, Fahrzeug fahrzeug, Date beginndatum, Date enddatum) throws Exception {
 
         Boolean leihemoeglich = false;
 
         List<Leihvertrag> vertragezwischen = em.createQuery("SELECT l FROM Leihvertrag l"
-                + " WHERE l.beginndatum < :beginndatum"
-                + " AND l.enddatum > :enddatum"
+                + " WHERE l.beginndatum <=:beginndatum"
+                + " AND l.enddatum >= :enddatum"
                 + " AND l.fahrzeug = :fahrzeug")
                 .setParameter("beginndatum", beginndatum)
                 .setParameter("enddatum", enddatum)
@@ -44,8 +44,8 @@ public class LeihvertragBean extends EntityBean<Leihvertrag, Long> {
 
         if (vertragezwischen.isEmpty()) {
             List<Leihvertrag> außerhalb = em.createQuery("SELECT l FROM Leihvertrag l"
-                    + " WHERE l.beginndatum > :beginndatum"
-                    + " AND l.enddatum < :enddatum"
+                    + " WHERE l.beginndatum >= :beginndatum"
+                    + " AND l.enddatum <= :enddatum"
                     + " AND l.fahrzeug = :fahrzeug")
                     .setParameter("beginndatum", beginndatum)
                     .setParameter("enddatum", enddatum)
@@ -53,8 +53,8 @@ public class LeihvertragBean extends EntityBean<Leihvertrag, Long> {
                     .getResultList();
             if (außerhalb.isEmpty()) {
                 List<Leihvertrag> beginnvorher = em.createQuery("SELECT l FROM Leihvertrag l"
-                        + " WHERE l.beginndatum > :beginndatum"
-                        + " AND l.enddatum > :enddatum"
+                        + " WHERE l.beginndatum >= :beginndatum"
+                        + " AND l.beginndatum <= :enddatum"
                         + " AND l.fahrzeug = :fahrzeug")
                         .setParameter("beginndatum", beginndatum)
                         .setParameter("enddatum", enddatum)
@@ -62,15 +62,15 @@ public class LeihvertragBean extends EntityBean<Leihvertrag, Long> {
                         .getResultList();
 
                 if (beginnvorher.isEmpty()) {
-                    List<Leihvertrag> endevorher = em.createQuery("SELECT l FROM Leihvertrag l"
-                            + " WHERE l.beginndatum > :beginndatum"
-                            + " AND l.enddatum < :enddatum"
+                    List<Leihvertrag> endespäter = em.createQuery("SELECT l FROM Leihvertrag l"
+                            + " WHERE l.enddatum >= :beginndatum"
+                            + " AND l.enddatum <= :enddatum"
                             + " AND l.fahrzeug = :fahrzeug")
                             .setParameter("beginndatum", beginndatum)
                             .setParameter("enddatum", enddatum)
                             .setParameter("fahrzeug", fahrzeug)
                             .getResultList();
-                    if (endevorher.isEmpty()) {
+                    if (endespäter.isEmpty()) {
                         leihemoeglich = true;
                     }
                 }
@@ -82,7 +82,7 @@ public class LeihvertragBean extends EntityBean<Leihvertrag, Long> {
             Leihvertrag leihvertrag = new Leihvertrag(kunde, fahrzeug, beginndatum, enddatum);
             return this.saveNew(leihvertrag);
         } else {
-            return null;
+            throw new Exception();
         }
     }
 
