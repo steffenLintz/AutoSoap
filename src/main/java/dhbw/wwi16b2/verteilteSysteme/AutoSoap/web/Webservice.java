@@ -83,7 +83,7 @@ public class Webservice {
             @WebParam(name = "kunde") Kunde kunde,
             @WebParam(name = "fahrzeug") Fahrzeug fahrzeug,
             @WebParam(name = "beginnDatum") Date beginnDatum,
-            @WebParam(name = "endDatum") Date endDatum) {
+            @WebParam(name = "endDatum") Date endDatum) throws Exception {
 
         return leihvertragBean.ausleihen(kunde,fahrzeug, beginnDatum, endDatum);
     }
